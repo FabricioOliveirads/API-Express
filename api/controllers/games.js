@@ -43,7 +43,29 @@ module.exports = app => {
 
 
   }
+  controller.updateGames = (req,res)=> 
+   {
+    const {gameId} = req.params;
+    const foundGameIndex = gamesMock.data.findIndex(game => game.id === gameId);
+    if(foundGameIndex === -1){
+      res.status(404).json({
+        message: 'Game não encontrado',
+        success: false,
+        games: gamesMock,
+      });
+    }else {
+      gamesMock.data[foundGameIndex].title =  req.body.title;
+      gamesMock.data[foundGameIndex].year =  req.body.year;
+      gamesMock.data[foundGameIndex].type =  req.body.type;
 
+      
+      res.status(200).json({
+        message: 'Game atualizado com sucesso!',
+        success: true,
+        games: gamesMock,
+      });
+    }
+  }
   return controller;
 
 }

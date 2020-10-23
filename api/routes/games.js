@@ -7,4 +7,7 @@ module.exports  = app => {
 
   app.route('/api/v1/games/:gameId')
     .delete(controller.removeGames);
+
+  app.route('/api/v1/games/:gameId').
+  put(controller.updateGames);  
 }
